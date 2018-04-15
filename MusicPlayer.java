@@ -21,13 +21,20 @@ import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.cell.PropertyValueFactory;
+import java.util.stream.Collectors;
+import java.io.File;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 public class MusicPlayer extends Application {
 	private static final String MEDIA_URL =
  		"http://download.oracle.com/otndocs/products/javafx/oow2010-2.flv";
  		final URL resource = getClass().getResource("BossaBossa.mp3");
  		private TableView table = new TableView();
 	@Override 
+
 	public void start(Stage primaryStage) {
+		File curDirectory = new File(".");
+		Files.walk(Paths.get("")).map(b -> b.toString()).filter(a -> a.contains(".mp3")).collect(Collectors.toList());
 		ObservableList<Song> songList = FXCollections.observableArrayList();
 		songList.add(new Song("BossaBossa"));
 		songList.add(new Song ("BitterSweet"));
